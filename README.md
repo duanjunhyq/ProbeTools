@@ -24,3 +24,38 @@ The incrementalprobes.sh script will perform an incremental design strategy on t
 
 # ProbeTools Setup
 
+1. Download the ProbeTools code:
+```
+git clone https://github.com/KevinKuchinski/ProbeTools.git
+```
+2. Create the ProbeTools environment:
+```
+conda env create -f ProbeTools_env.yml
+```
+
+# ProbeTools Usage
+
+<b>makeprobes.py</b>
+```
+$ python makeprobes.py -t <target_space_FASTA.fa> -o <ranked_probes_FASTA.fa> [-n MAX -i 90 -k 120 -s 1 -d 0]
+```
+
+<b>capture.py</b>
+```
+$ python capture.py -t <target_space_FASTA.fa> -p <probes_FASTA.fa> -o <CAPT_output.capt> [-i 90 -l 60]
+```
+
+<b>getlowcov.py</b>
+```
+$ python getlowcov.py -i <CAPT_input.capt> -o <lowcov_regions_FASTA_output.fa> [-d 0 -l 10 -w 120]
+```
+
+<b>stats.py</b>
+```
+$ python stats.py -i <CAPT_input.capt> -o <panel_name_descriptor>
+```
+
+<b>incrementalprobes.sh</b>
+```
+$ bash incrementalprobes.sh</b> <target_space_FASTA.fa> <batch_size> <coverage_target> <max_probes> <panel_name_descriptor>
+```
