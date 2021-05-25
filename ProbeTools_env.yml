@@ -1,4 +1,4 @@
-name: probetools
+name: ProbeTools
 channels:
   - bioconda
   - conda-forge
