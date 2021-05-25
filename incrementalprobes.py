@@ -72,6 +72,8 @@ while loop==True:
         with open(args.output+'_round_'+str(r)+'_summary.tsv') as summaryFile:
             summaryFileLines=summaryFile.readlines()
         tenthPercentileCoverage=float(summaryFileLines[-1].split('\t')[4])
+        cmd='rm '+args.output+'_round_'+str(r)+'_summary.tsv'
+        subprocess.call(cmd,shell=True)
 
         with open(args.output+'_final_probes.fa') as probesFile:
             probesFileLines=probesFile.readlines()
@@ -108,6 +110,8 @@ while loop==True:
         print('No more probes can be designed.')
         loop=False
 
+cmd='rm '+args.output+'_round_'+str(r)+'_capture.pt'
+subprocess.call(cmd,shell=True)
 cmd='python capture.py -t '+args.targets+' -p '+args.output+'_final_probes.fa -o '+args.output+'_final'
 subprocess.call(cmd,shell=True)
 cmd='python stats.py -i '+args.output+'_final_capture.pt -o '+args.output+'_final'
