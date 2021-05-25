@@ -79,7 +79,7 @@ This script aligns all provided probe sequences against all provded target seque
 
 <b>getlowcov.py</b>
 ```
-$ python getlowcov.py -i <CAPT_input.capt> -o <lowcov_regions_FASTA_output.fa> [-d 0 -l 10 -w 120]
+$ python getlowcov.py -i <CAPT_input.capt> -o <job_name> [-d 0 -l 10 -w 120]
 ```
 This script extracts sub-sequences with low coverage from a provide .pt capture results file.
 
@@ -97,7 +97,7 @@ This script extracts sub-sequences with low coverage from a provide .pt capture 
 
 <b>stats.py</b>
 ```
-$ python stats.py -i <CAPT_input.capt> -o <panel_name_descriptor>
+$ python stats.py -i <CAPT_input.capt> -o <job_name>
 ```
 This script analyzes a provided .pt capture results file and calculates statistics about the capture. 
 
@@ -109,7 +109,22 @@ This script analyzes a provided .pt capture results file and calculates statisti
 
 <b>incrementalprobes.py</b>
 ```
-$ bash incrementalprobes.sh</b> <target_space_FASTA.fa> <batch_size> <coverage_target> <max_probes> <panel_name_descriptor>
+$ python incrementalprobes.py -t <target_space_FASTA.fa> -o <job_name> -b <batch_size> -m <max_probes_in_panel> -c <coverage_target>
 ```
+The script automates a generalized incremental design process. Probes will be generated against the provided target space FASTA, adding a number of probes each batch specified by <batch_size>. New batches will be added until one of end-point conditions is met: the panel contains the maximum number of probes, or the 10th percentile of coverage reaches the coverage target. At this point, the final probe panel will be complete (job_name_final_probes.fa). 
 
 # .pt Format Specifications
+The .pt format is largely derived from the FASTA format. Each entry spans three lines, each starting with its own identifying character:
+
+<b>Entry header (>):</b> A text header to describe the sequence. Do not use spaces in the header.
+
+<b>Entry sequence ($):</b> The nucleotide sequence of the entry.
+
+<b>Entry probe depths (#):</b> A comma-separated list of the number of probes covering each nucleotide position. The order of the list follows the order of the nucleotide sequence, i.e. the 4th number of the list describes the number probes covering the 4th nucletoide of the entry's sequence.
+
+<u>Example entry:</u>
+```
+>Entry_header
+$ATGCGTTGACAGTGCACACG
+#1,1,1,1,1,2,2,2,2,2,1,1,2,2,2,3,3,3,3,3
+```
