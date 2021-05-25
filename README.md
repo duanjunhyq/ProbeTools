@@ -22,7 +22,7 @@ A generalized incremental design strategy has been implemented in a convenient f
 3. The level of coverage desired for the top 90% of reference sequences
 4. The maxmimum number of probes in the panel
 
-The incrementalprobes.sh script will perform an incremental design strategy on the provided target space, adding the indicated number of probes each batch. It will continue adding batches until the desired coverage target is achieved or the panel contains the maximum number of probes, whichever occurs first. Smaller batch sizes will result in better coverage from more compact panel sizes, but increase the computation time required for the design.
+The incrementalprobes.py script will perform an incremental design strategy on the provided target space, adding the indicated number of probes each batch. It will continue adding batches until the desired coverage target is achieved, or the panel contains the maximum number of probes, or there is no uncovered targetspace remaining, whichever occurs first. Smaller batch sizes will result in better coverage from more compact panel sizes, but increase the computation time required for the design.
 
 # ProbeTools Setup
 
